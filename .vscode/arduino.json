@@ -1,0 +1,5 @@
+{
+    "board": "arduino:samd:mkr1000",
+    "port": "COM8",
+    "sketch": "week1\\light-control-2\\light-control-2.ino"
+}

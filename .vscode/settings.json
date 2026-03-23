@@ -1,0 +1,4 @@
+{
+    "git.enableCommitSigning": true,
+    "C_Cpp.default.compilerPath": "C:\\Users\\henry\\AppData\\Local\\Arduino15\\packages\\esp8266\\tools\\xtensa-lx106-elf-gcc\\3.1.0-gcc10.3-e5f9fec\\bin\\xtensa-lx106-elf-g++"
+}
