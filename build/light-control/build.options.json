@@ -1,9 +1,0 @@
-{
-  "additionalFiles": "",
-  "compiler.optimization_flags": "-Os",
-  "customBuildProperties": "build.warn_data_percentage=75",
-  "fqbn": "arduino:samd:mkr1000",
-  "hardwareFolders": "C:\\Users\\henry\\AppData\\Local\\Arduino15\\packages",
-  "otherLibrariesFolders": "C:\\Users\\henry\\Documents\\Arduino\\libraries",
-  "sketchLocation": "C:\\Users\\henry\\Documents\\Sensors-Actuators-Controllers\\week1\\light-control"
-}
