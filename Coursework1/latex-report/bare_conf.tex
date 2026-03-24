@@ -8,10 +8,10 @@
 \title{Closed-Loop PID Control of Light Intensity Using an LDR and WS2812 LED}
 
 \author{
-\IEEEauthorblockN{Your Name}
+\IEEEauthorblockN{Henry Johnson (25590191)}
 \IEEEauthorblockA{
-Electronic Engineering\\
-Your University}
+MEng Electrical and Electronic Engineering\\
+University of Lincoln}
 }
 
 \begin{document}
@@ -36,86 +36,100 @@ From an engineering perspective, the system demonstrates how feedback control en
 
 \section{Sensor Data Analysis}
 
-The LDR operates as a resistive sensor whose resistance decreases as light intensity increases. When configured in a voltage divider, this produces an analogue voltage that is converted into a digital value by the Arduino’s 10-bit ADC.
+The LDR operates as a resistive sensor whose resistance decreases nonlinearly as incident light intensity increases. When configured as part of a voltage divider, this varying resistance produces an analogue voltage that is sampled by the Arduino’s 10-bit ADC, yielding values in the range 0–1023. However, due to the logarithmic response of the LDR, the relationship between light intensity and ADC output is not linear, which introduces additional complexity when designing a control system.
 
-Raw sensor readings are subject to several sources of noise, including electrical interference, ambient fluctuations, and quantisation error. To mitigate these effects, multiple ADC samples are averaged to reduce random noise. In addition, an exponential low-pass filter is applied to smooth the signal according to:
+Raw sensor readings were observed to be highly variable, even under relatively constant lighting conditions. This variation arises from several sources, including electrical noise in the ADC, small fluctuations in ambient light, and quantisation effects inherent to digital conversion. These fluctuations are particularly problematic for control systems, as they can lead to unstable or oscillatory behaviour, especially when using derivative control.
+
+To mitigate these issues, two stages of signal conditioning were implemented. Firstly, multiple ADC readings are averaged to reduce high-frequency random noise. Secondly, an exponential low-pass filter is applied to smooth the signal over time, as described by:
 
 \begin{equation}
 PV_f = PV_f + \alpha (PV - PV_f)
 \end{equation}
 
-This filtering significantly improves signal stability, although it introduces a slight delay in system response. This trade-off is essential, as unfiltered signals would cause instability, particularly in the derivative component of the PID controller.
+This filter acts as a first-order system, attenuating rapid fluctuations while preserving slower changes in light intensity. The choice of the parameter $\alpha$ determines the trade-off between responsiveness and smoothness. A higher value results in faster response but less filtering, whereas a lower value provides greater smoothing at the expense of delay.
 
 \begin{figure}[!t]
 \centering
 \fbox{\parbox{0.8\columnwidth}{Insert Sensor Raw vs Filtered Graph}}
-\caption{Comparison of raw and filtered LDR readings demonstrating noise reduction.}
+\caption{Comparison of raw and filtered LDR readings. The raw signal exhibits high-frequency noise and fluctuations, while the filtered signal demonstrates a smoother response with reduced variance. This figure illustrates the necessity of filtering in improving measurement reliability for control applications.}
 \end{figure}
+
+The filtered signal is significantly more stable and suitable for feedback control. Without this filtering, the derivative term of the PID controller would amplify noise, leading to erratic actuator behaviour. Therefore, signal conditioning is essential for ensuring both stability and accuracy in the control system.
 
 \section{Actuator Behaviour}
 
-The WS2812 LED is a digitally controlled light source with an 8-bit brightness resolution. Its fast response time makes it suitable for control applications, although its perceived brightness is not perfectly linear due to human visual perception.
+The WS2812 LED is a digitally addressable RGB LED that allows brightness control through an 8-bit value ranging from 0 to 255. The LED responds rapidly to input changes, making it suitable for real-time control applications. However, the perceived brightness of the LED is not linearly proportional to the input value due to the nonlinear response of human vision, which can affect how changes in output are interpreted visually.
 
-In this system, the actuator output is determined by a combination of a base output level and the PID control signal. The inclusion of a base output ensures that the system operates within a useful range and avoids issues associated with very low brightness levels.
+In this system, the actuator output is composed of a base output level combined with the PID controller output. The base output provides a steady illumination level around which the controller operates, ensuring that the system remains within an effective operating range. This is particularly important because very low brightness levels can result in poor sensitivity and increased noise in the sensor readings.
 
-To improve stability, rate limiting is applied to the actuator output, restricting how quickly the brightness can change. This prevents rapid fluctuations that could otherwise occur due to aggressive control action. Without this feature, the system would exhibit visible flickering even if the control algorithm were mathematically stable.
+A key issue identified during implementation was the tendency for rapid fluctuations in LED brightness when the control signal changed abruptly. Although the PID controller may produce mathematically correct outputs, these rapid changes can result in visible flickering, which is undesirable in practical applications. To address this, rate limiting was introduced to constrain how quickly the actuator output can change between successive updates.
 
+This rate limiting effectively smooths the actuator response, reducing high-frequency variations in brightness while maintaining overall control performance. As a result, the system achieves a balance between responsiveness and visual stability.
+
+The behaviour of the actuator demonstrates that, in practical control systems, it is not sufficient to consider only the mathematical correctness of the control algorithm. Physical and perceptual constraints must also be taken into account to ensure acceptable real-world performance.
 \section{Open-Loop Control Behaviour}
 
-In the open-loop configuration, the LED brightness is fixed and does not respond to sensor input. As a result, the system cannot compensate for changes in ambient light.
+In the open-loop configuration, the LED is driven at a fixed brightness level that is independent of the sensor input. This means that the system does not incorporate any feedback and therefore has no mechanism to correct for changes in ambient light conditions.
 
-Experimental observations show that while the sensor value varies significantly under changing conditions, the actuator output remains constant. This leads to poor performance in dynamic environments, as the system cannot maintain a consistent light level.
+Experimental observations show that when external disturbances are introduced, such as covering the sensor or introducing additional light sources, the measured sensor value changes significantly while the actuator output remains constant. This results in large deviations from the desired operating condition.
 
 \begin{figure}[!t]
 \centering
 \fbox{\parbox{0.8\columnwidth}{Insert Open-Loop Behaviour Graph}}
-\caption{Open-loop response showing constant output despite changing sensor input.}
+\caption{Open-loop system response showing sensor readings over time while the actuator output remains constant. The graph illustrates how disturbances cause significant variation in measured light levels without any corrective action.}
 \end{figure}
 
-This demonstrates that open-loop control is insufficient for applications where environmental conditions are unpredictable.
+The graph would show the sensor value fluctuating over time in response to disturbances, while the LED output remains fixed. This highlights a fundamental limitation of open-loop control: the inability to adapt to environmental changes.
 
+From a control engineering perspective, this demonstrates that open-loop systems are only suitable for environments where conditions are predictable and disturbances are minimal. In dynamic or uncertain environments, such as real-world lighting conditions, open-loop control is insufficient for maintaining consistent performance.
 \section{Closed-Loop PID Control}
 
-The closed-loop system uses a PID controller to regulate light intensity. The control law is given by:
+The closed-loop system employs a PID controller to regulate light intensity by continuously adjusting the actuator output based on the error between the desired setpoint and the measured sensor value. The control law is defined as:
 
 \begin{equation}
 u(t) = K_p e(t) + K_i \int e(t) dt + K_d \frac{de(t)}{dt}
 \end{equation}
 
-The proportional term provides an immediate response to the error, the integral term eliminates steady-state error, and the derivative term improves system stability by damping rapid changes.
+The proportional term provides an immediate response to the error, ensuring that the system reacts quickly to deviations from the setpoint. The integral term accumulates past errors and eliminates steady-state offset, allowing the system to converge precisely to the desired value. The derivative term predicts future trends in the error, providing damping that reduces overshoot and improves stability.
 
-In this implementation, the derivative is taken on the measured signal rather than the error, reducing sensitivity to noise. Additionally, derivative filtering is applied to further stabilise the system.
+In this implementation, the derivative is calculated based on the measured signal rather than the error. This approach reduces sensitivity to noise, as sudden changes in the error signal are often caused by measurement noise rather than true system dynamics. Additionally, derivative filtering is applied to further smooth the derivative term and prevent amplification of high-frequency noise.
 
 \subsection{Advanced Control Enhancements}
 
-Several enhancements have been implemented to improve performance. Anti-windup mechanisms prevent the integral term from accumulating excessively when the actuator saturates. This is achieved through conditional integration and clamping of the integral value within defined bounds.
+Several enhancements were implemented to improve robustness. Anti-windup mechanisms prevent the integral term from growing excessively when the actuator reaches its limits. Without this, the system would exhibit large overshoots when it re-enters the controllable region. A deadband is also introduced to prevent unnecessary control action when the error is very small, reducing oscillations around the setpoint.
 
-A deadband is introduced to eliminate unnecessary control action when the error is very small, reducing oscillations around the setpoint. Furthermore, automatic calibration is used to determine system characteristics such as ambient light levels and control direction, allowing the system to adapt to different environments.
+Automatic calibration allows the system to determine ambient conditions and adjust its setpoint and control direction accordingly. This ensures that the controller operates effectively across different lighting environments without requiring manual adjustment.
 
 \subsection{System Behaviour}
 
-The closed-loop system demonstrates stable convergence to the desired setpoint. When disturbances are introduced, such as changes in ambient light, the controller adjusts the actuator output to restore the desired light level.
+The closed-loop system demonstrates stable convergence to the setpoint under normal operating conditions. When disturbances are introduced, the controller responds by adjusting the actuator output to counteract the change and restore the desired light level.
 
 \begin{figure}[!t]
 \centering
 \fbox{\parbox{0.8\columnwidth}{Insert Closed-Loop Step Response}}
-\caption{Closed-loop response showing convergence to the desired setpoint.}
+\caption{Closed-loop step response showing convergence to the setpoint. The graph illustrates how the system initially deviates from the target value and then settles with minimal steady-state error.}
 \end{figure}
 
 \begin{figure}[!t]
 \centering
 \fbox{\parbox{0.8\columnwidth}{Insert Disturbance Response}}
-\caption{System response to disturbance demonstrating recovery to setpoint.}
+\caption{Disturbance response of the closed-loop system. The graph shows how the system reacts to a sudden change in ambient light and subsequently returns to the setpoint, demonstrating effective disturbance rejection.}
 \end{figure}
 
-Compared to open-loop control, the closed-loop system provides significantly improved performance, including reduced steady-state error and effective disturbance rejection.
+The step response graph would show the system gradually approaching the setpoint with limited overshoot, while the disturbance graph would show a temporary deviation followed by recovery. These behaviours confirm that the controller is both stable and responsive.
+
+Compared to open-loop control, the closed-loop system significantly reduces steady-state error and provides strong disturbance rejection. This demonstrates the effectiveness of feedback control in maintaining system performance under varying conditions.
+
 
 \section{Design Methodology and Evaluation}
 
-The system was developed iteratively, beginning with an open-loop implementation and progressively incorporating proportional, integral, and derivative control. Additional features such as filtering, anti-windup, and calibration were introduced to address observed limitations.
+The system was developed using an iterative approach, beginning with a simple open-loop implementation to establish baseline behaviour. This was followed by the introduction of proportional control, which improved responsiveness but still resulted in steady-state error.
 
-This iterative approach allowed for continuous improvement and validation of the system. The final implementation represents a balance between responsiveness, stability, and robustness.
+Integral control was then added to eliminate this error, although it introduced the risk of overshoot and instability. The derivative term was subsequently implemented to provide damping and improve system stability. During testing, it became clear that additional measures were required to address practical issues such as sensor noise and actuator limitations.
 
+As a result, filtering, anti-windup mechanisms, and rate limiting were incorporated into the design. Automatic calibration was also introduced to improve adaptability. Each of these enhancements was validated experimentally, leading to a progressively more robust system.
+
+This iterative development process highlights the importance of testing and refinement in control system design. Rather than relying solely on theoretical models, practical implementation revealed additional challenges that required engineering solutions.
 \section{Use of Scientific Principles}
 
 The project applies fundamental principles of control theory, including feedback systems, PID control, and signal processing. These principles were used to solve a practical engineering problem involving real-world constraints such as noise and actuator limitations.
@@ -129,7 +143,7 @@ The development of this system was informed by a combination of academic literat
 The full implementation is available at:
 
 \textbf{GitHub Repository:} \\
-\textit{Insert GitHub Link Here}
+\textit{https://github.com/Thomriiii/Sensors-Actuators-Controllers/tree/main/Coursework1}
 
 A demonstration of the system operation can be viewed at:
 
@@ -138,6 +152,10 @@ A demonstration of the system operation can be viewed at:
 
 \section{Conclusion}
 
-A closed-loop PID control system has been successfully implemented and evaluated. The system demonstrates clear advantages over open-loop control, including improved stability, accuracy, and adaptability. The inclusion of advanced features such as filtering and anti-windup further enhances performance. This project highlights the effectiveness of feedback control in real-world engineering applications.
+A closed-loop PID control system has been successfully implemented and evaluated for regulating light intensity using an LDR sensor and WS2812 LED actuator. The system demonstrates clear advantages over open-loop control, including improved stability, reduced steady-state error, and effective disturbance rejection.
+
+The inclusion of advanced features such as signal filtering, anti-windup, and rate limiting was essential in achieving reliable performance, highlighting the importance of addressing real-world constraints in control system design. The results demonstrate that feedback control provides a robust solution for maintaining consistent output in dynamic environments.
+
+Overall, this project illustrates both the theoretical principles and practical considerations involved in implementing a PID controller, providing a comprehensive understanding of closed-loop control systems.
 
 \end{document}

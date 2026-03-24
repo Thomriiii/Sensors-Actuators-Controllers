@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.19)  23 MAR 2026 16:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.24)  24 MAR 2026 17:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/henry/Documents/Sensors-Actuators-Controllers/Sensors-Actuators-Controllers/Coursework1/latex-report/bare_conf.tex
-(c:/Users/henry/Documents/Sensors-Actuators-Controllers/Sensors-Actuators-Controllers/Coursework1/latex-report/bare_conf.tex
+**c:/Users/henry/Documents/Sensors-Actuators-Controllers/Coursework1/latex-report/bare_conf.tex
+(c:/Users/henry/Documents/Sensors-Actuators-Controllers/Coursework1/latex-report/bare_conf.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (IEEEtran.cls
@@ -264,7 +264,11 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
  [1{C:/Users/henry/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/henry/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}
 
 
-]
+] [2]
+Underfull \hbox (badness 10000) in paragraph at lines 145--147
+\OT1/ptm/m/it/10 https://github.com/Thomriiii/Sensors-Actuators-
+ []
+
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -276,7 +280,7 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-[2] (bare_conf.aux)
+[3] (bare_conf.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -284,16 +288,16 @@ L3 programming layer <2026-01-19>
  ) 
 Here is how much of TeX's memory you used:
  4536 strings out of 467867
- 71682 string characters out of 5418334
- 498060 words of memory out of 5000000
+ 71442 string characters out of 5418334
+ 500101 words of memory out of 5000000
  33414 multiletter control sequences out of 15000+600000
  658649 words of font info for 91 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,9n,65p,710b,281s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 57i,9n,65p,680b,281s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/henry/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/henry/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/henry/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/henry/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/henry/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/henry/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/henry/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/henry/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/henry/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on bare_conf.pdf (2 pages, 109326 bytes).
+Output written on bare_conf.pdf (3 pages, 116215 bytes).
 PDF statistics:
- 55 PDF objects out of 1000 (max. 8388607)
+ 58 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
