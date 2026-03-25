@@ -1,7 +1,13 @@
 # Fdb version 4
+<<<<<<< HEAD
 ["pdflatex"] 1774453680.57075 "c:/Users/henry/Documents/Sensors-Actuators-Controllers/Sensors-Actuators-Controllers/Coursework1/latex-report/bare_conf.tex" "bare_conf.pdf" "bare_conf" 1774453681.26711 0
   "C:/Users/henry/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1774450271 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/henry/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1773938186 13333849 f4760407361d35e55102285b9c6d0ff3 ""
+=======
+["pdflatex"] 1774373748.12723 "c:/Users/henry/Documents/Sensors-Actuators-Controllers/Coursework1/latex-report/bare_conf.tex" "bare_conf.pdf" "bare_conf" 1774373748.79607 0
+  "C:/Users/henry/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1774372072 82507 a9eef8696c92627b87e9975edea03b2a ""
+  "C:/Users/henry/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1774372068 13333849 791e6e9be7f1e941ec2000b7e4932020 ""
+>>>>>>> a27c6a84dd9b5039ae83ad593afcec87c97d4f02
   "C:/Users/henry/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
   "C:/Users/henry/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/times/ptmb7t.tfm" 1136772254 2172 fd0c924230362ff848a33632ed45dc23 ""
   "C:/Users/henry/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/times/ptmb8r.tfm" 1136772254 4524 6bce29db5bc272ba5f332261583fee9c ""
@@ -52,6 +58,7 @@
   "C:/Users/henry/AppData/Local/Programs/MiKTeX/tex/latex/listings/lstpatch.sty" 1763898348 353 9024412f43e92cd5b21fe9ded82d0610 ""
   "C:/Users/henry/AppData/Local/Programs/MiKTeX/tex/latex/psnfss/ot1ptm.fd" 1585253778 1007 15056f4a61917ceed3a44e4ac11fcc52 ""
   "C:/Users/henry/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
+<<<<<<< HEAD
   "IEEEtran.cls" 1773936919 220413 3585e63204c3b8111bb2bf0eda265d43 ""
   "bare_conf.aux" 1774453681 2740 2375a4404ef373f47129be1e629c9d10 "pdflatex"
   "bare_conf.tex" 1774453679 17504 76a9aeeac1e7699e22b42db90ed65ac0 ""
@@ -60,6 +67,12 @@
   "graphs/disturbance.png" 1774451182 34983 ded809441810217c362d17a485fa0e78 ""
   "graphs/open_loop.png" 1774453088 110744 02c7b79b29f831bad95f385ac49b92e9 ""
   "graphs/sensor_graph.png" 1774451182 37241 52326a030e16d4254d21a502c8d81db7 ""
+=======
+  "IEEEtran.cls" 1774362390 220413 3585e63204c3b8111bb2bf0eda265d43 ""
+  "bare_conf.aux" 1774373748 2854 5b0b0ead3785708f2fe8a229354dd09c "pdflatex"
+  "bare_conf.tex" 1774373747 14986 6cd599819ed31a2df2cae99ad6827dff ""
+  "c:/Users/henry/Documents/Sensors-Actuators-Controllers/Coursework1/latex-report/bare_conf.tex" 1774373747 14986 6cd599819ed31a2df2cae99ad6827dff ""
+>>>>>>> a27c6a84dd9b5039ae83ad593afcec87c97d4f02
   (generated)
   "bare_conf.aux"
   "bare_conf.log"

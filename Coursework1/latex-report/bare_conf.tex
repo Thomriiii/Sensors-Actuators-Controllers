@@ -232,7 +232,9 @@ Initial implementations used direct dual-sampling at every control step, which p
 
 PID gains were tuned experimentally to balance responsiveness and stability. Additional enhancements, including filtering, anti-windup, integral limiting, and rate limiting, were introduced to address specific observed issues such as overshoot, noise sensitivity, and actuator saturation.
 
-The final system represents a trade-off between measurement accuracy, control performance, and practical hardware limitations. This iterative process reflects real-world engineering practice, where theoretical designs must be adapted to account for implementation constraints.
+As a result, filtering, anti-windup mechanisms, and rate limiting were incorporated into the design. Automatic calibration was also introduced to improve adaptability. Each of these enhancements was validated experimentally, leading to a progressively more robust system.
+
+This iterative development process highlights the importance of testing and refinement in control system design. Rather than relying solely on theoretical models, practical implementation revealed additional challenges that required engineering solutions.
 
 \section{Use of Scientific Principles}
 
@@ -247,7 +249,7 @@ The development of this system was informed by a combination of academic literat
 The full implementation is available at:
 
 GitHub Repository: \\
-\textit{https://github.com/Thomriiii/Sensors-Actuators-Controllers/blob/main/Coursework1/closedloop-led/closedloop-led.ino}
+\textit{https://github.com/Thomriiii/Sensors-Actuators-Controllers/tree/main/Coursework1}
 
 A demonstration of the system operation can be viewed at:
 

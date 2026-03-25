@@ -1,6 +1,6 @@
-PWD c:\Users\henry\Documents\Sensors-Actuators-Controllers\Sensors-Actuators-Controllers\Coursework1\latex-report
+PWD c:\Users\henry\Documents\Sensors-Actuators-Controllers\Coursework1\latex-report
 INPUT C:\Users\henry\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT c:\Users\henry\Documents\Sensors-Actuators-Controllers\Sensors-Actuators-Controllers\Coursework1\latex-report\bare_conf.tex
+INPUT c:\Users\henry\Documents\Sensors-Actuators-Controllers\Coursework1\latex-report\bare_conf.tex
 OUTPUT bare_conf.log
 INPUT .\IEEEtran.cls
 INPUT IEEEtran.cls
