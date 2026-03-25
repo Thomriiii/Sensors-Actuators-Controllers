@@ -1,0 +1,9 @@
+classification,WELL-TUNED
+steady_state_error,1.9370
+overshoot_pct,1.4029
+output_saturation_fraction,0.0000
+steady_state_std,3.2968
+zero_crossings,2.0000
+rise_time_s,0.2200
+settling_time_s,24.2000
+ise,7194.0039
