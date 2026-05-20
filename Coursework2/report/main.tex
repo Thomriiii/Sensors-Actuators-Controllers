@@ -5,6 +5,7 @@
 \usepackage{amsmath}
 \usepackage{tabularx}
 \usepackage{url}
+\usepackage[hidelinks,breaklinks=true]{hyperref}
 
 \graphicspath{{figures/}}
 \hyphenation{furuta}
@@ -359,9 +360,8 @@ The more serious limitation lies on the actuator side. The 42BYGH162-A-21DH step
 The Arduino Motor Shield Rev3 is similarly convenient but not ideal. It provides an accessible route to early experimentation, yet it does not offer the same current regulation, microstepping capability or torque smoothness as a dedicated stepper driver. That means the final hardware performance is constrained not only by control tuning, but also by the power electronics. In critical terms, the selected hardware was sufficient for prototyping and demonstrating the control concepts, but it does not represent the most robust architecture for precision balancing or repeatable swing-up capture.
 
 \subsection{Video, Source Code and Design Files}
-\noindent\textbf{Video Evidence:} \url{https://youtube.com/shorts/5Z5avwsL-BM}. \par
-\noindent\textbf{GitHub Repository:} \url{https://youtube.com/shorts/5Z5avwsL-BM}. \par
-
+\noindent\textbf{Video Evidence:} \href{https://youtube.com/shorts/5Z5avwsL-BM}{\nolinkurl{https://youtube.com/shorts/5Z5avwsL-BM}}. \par
+\noindent\textbf{GitHub Repository:} \href{https://github.com/Thomriiii/Sensors-Actuators-Controllers/tree/main/Coursework2}{\nolinkurl{https://github.com/Thomriiii/Sensors-Actuators-Controllers/tree/main/Coursework2}}. \par
 \section{Limitations and Future Development}
 The present simulation model is useful for studying the principal dynamics of the system, but it still has practical limitations. In its current form, the model is unlikely to capture every non-ideal effect present in the real hardware. Motor saturation, dead-zone behaviour, structural compliance, encoder quantisation and Coulomb friction can all become significant when moving from simulation to experiment. The most significant missing non-ideality in this project is step loss in the stepper actuator, because the arm state estimate depends directly on the commanded step count.
 
