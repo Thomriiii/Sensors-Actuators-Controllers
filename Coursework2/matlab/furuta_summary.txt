@@ -1,0 +1,48 @@
+Rotary inverted pendulum MATLAB model summary
+===========================================
+
+Assumptions
+- Material density: 2700 kg/m^3
+- Equivalent actuator saturation: 0.180 N m
+- Encoder resolution: 600 pulses/rev (2400 quadrature counts/rev)
+
+Report-aligned hardware context
+- Scenario: Local MATLAB balance assessment for the revised 125 mm arm rig
+- Fabrication note: 3D printed on Bambu printers with fixtures designed around the stepper motor and encoder
+- Controller hardware: Arduino Uno Rev3 + Motor Shield
+- Motor: 42BYGH162-A-21DH
+- Pendulum encoder: E38S6G5-600B-G24N
+- Arm angle feedback: Estimated in hardware from commanded step count
+- Known hardware issue: Stepper skipped steps observed during aggressive motion
+
+Derived geometry and inertia
+- Arm length Lr: 0.125 m
+- Arm mass mr: 0.03240 kg
+- Arm inertia Jr: 0.00019375 kg m^2
+- Pendulum rod length Lrod: 0.266 m
+- Overall height Ltot: 0.280 m
+- Pendulum mass mp: 0.03728 kg
+- Pendulum COM offset lp: 0.11489 m
+- Pendulum inertia Jp: 0.00029900 kg m^2
+
+Controller
+- Desired poles: [-4.50 -5.20 -6.20 -7.50]
+- K = [-0.008480 -0.206702 -0.007375 -0.022276]
+
+Closed-loop response metrics
+- Settling time within 2.0 deg: 0.5397 s
+- Peak pendulum deviation: 8.0000 deg
+- Peak arm excursion: 35.7876 deg
+- Peak control torque: 0.0289 N m
+- Final pendulum angle: 0.0086 deg
+- Final arm angle: 0.0309 deg
+- Final arm rotation: 0.0001 turns
+- Time at torque saturation (98% of limit or above): 0.14 %
+- Balance recovery achieved: yes
+- Torque-limited response observed: no
+
+Interpretation
+- With the 125 mm arm, the local balance controller recovers the 8 deg disturbance in simulation and remains close to the upright equilibrium.
+- The simulated actuator remains well below the saturation limit, indicating that the longer arm improves control authority in the ideal model.
+- Hardware performance is expected to be worse than the ideal simulation because skipped steps and arm-angle estimation drift are not explicitly modelled here.
+- Swing-up behaviour is handled in the Arduino implementation rather than in this local MATLAB balance script.
